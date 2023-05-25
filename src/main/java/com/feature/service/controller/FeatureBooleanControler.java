@@ -4,18 +4,19 @@ import com.feature.service.models.FeatureBoolean;
 import com.feature.service.service.FeatureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("feature/boolean")
-public class FeatureServiceControler {
+public class FeatureBooleanControler {
 
     @Autowired
     FeatureService featureService;
 
     @GetMapping
-    public void getFeatureByName(){
-
+    public Flux<FeatureBoolean> getAllFeatures(){
+        return featureService.listAllFeatures();
     }
 
     @PostMapping
