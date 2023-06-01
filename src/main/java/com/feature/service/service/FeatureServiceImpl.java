@@ -18,6 +18,7 @@ public class FeatureServiceImpl implements FeatureService {
 
     @Override
     public Mono<FeatureBooleanRecord> createFeature(FeatureBooleanRecord feature) {
+
         FeatureBoolean featureBoolean = new FeatureBoolean(UUID.randomUUID().toString(), feature.name(), feature.active());
 
         return featureBooleanRepository.save(featureBoolean)
