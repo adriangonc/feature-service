@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
-@Document(collation = "feature_booleans")
+@Document(collection = "feature_booleans")
 public class FeatureBoolean {
 
     @Id
