@@ -1,13 +1,13 @@
 package com.feature.service.service;
 
-import com.feature.service.models.FeatureBoolean;
+import com.feature.service.models.dto.FeatureBooleanRecord;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface FeatureService {
 
-    Mono<FeatureBoolean> createFeature(FeatureBoolean feature);
+    Mono<FeatureBooleanRecord> createFeature(FeatureBooleanRecord feature);
 
-    Flux<FeatureBoolean> listAllFeatures();
+    Flux<FeatureBooleanRecord> listAllFeatures();
 
 }

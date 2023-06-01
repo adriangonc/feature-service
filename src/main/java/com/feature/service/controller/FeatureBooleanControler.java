@@ -1,6 +1,6 @@
 package com.feature.service.controller;
 
-import com.feature.service.models.FeatureBoolean;
+import com.feature.service.models.dto.FeatureBooleanRecord;
 import com.feature.service.service.FeatureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +15,12 @@ public class FeatureBooleanControler {
     FeatureService featureService;
 
     @GetMapping
-    public Flux<FeatureBoolean> getAllFeatures(){
+    public Flux<FeatureBooleanRecord> getAllFeatures(){
         return featureService.listAllFeatures();
     }
 
     @PostMapping
-    public Mono<FeatureBoolean> createFeature(@RequestBody FeatureBoolean featureBoolean){
+    public Mono<FeatureBooleanRecord> createFeature(@RequestBody FeatureBooleanRecord featureBoolean){
         return featureService.createFeature(featureBoolean);
     }
 
