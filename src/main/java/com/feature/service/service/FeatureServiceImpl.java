@@ -5,6 +5,7 @@ import com.feature.service.models.dto.FeatureBooleanRecord;
 import com.feature.service.repository.FeatureBooleanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpStatusCodeException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -18,8 +19,12 @@ public class FeatureServiceImpl implements FeatureService {
 
     @Override
     public Mono<FeatureBooleanRecord> createFeature(FeatureBooleanRecord feature) {
-
         FeatureBoolean featureBoolean = new FeatureBoolean(UUID.randomUUID().toString(), feature.name(), feature.active());
+
+        //TODO verificar se já existe uma feature com mesmo nome
+        /*if (featureBooleanRepository.findByName(feature.name())){
+            return Mono.error(new Exception("Feature já existente!"));
+        }*/
 
         return featureBooleanRepository.save(featureBoolean)
                 .map(savedFeatureBoolean -> feature)
