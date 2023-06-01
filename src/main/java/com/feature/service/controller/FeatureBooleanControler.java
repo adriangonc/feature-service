@@ -3,6 +3,7 @@ package com.feature.service.controller;
 import com.feature.service.models.dto.FeatureBooleanRecord;
 import com.feature.service.service.FeatureService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -20,6 +21,7 @@ public class FeatureBooleanControler {
     }
 
     @PostMapping
+    @Transactional
     public Mono<FeatureBooleanRecord> createFeature(@RequestBody FeatureBooleanRecord featureBoolean){
         return featureService.createFeature(featureBoolean);
     }
