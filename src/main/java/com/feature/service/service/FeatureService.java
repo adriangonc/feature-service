@@ -6,7 +6,7 @@ import reactor.core.publisher.Mono;
 
 public interface FeatureService {
 
-    Mono<FeatureBooleanRecord> createFeature(FeatureBooleanRecord feature);
+    Mono<Object> createFeature(FeatureBooleanRecord feature);
 
     Flux<FeatureBooleanRecord> listAllFeatures();
 

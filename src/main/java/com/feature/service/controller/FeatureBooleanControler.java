@@ -22,7 +22,7 @@ public class FeatureBooleanControler {
 
     @PostMapping
     @Transactional
-    public Mono<FeatureBooleanRecord> createFeature(@RequestBody FeatureBooleanRecord featureBoolean){
+    public Mono<Object> createFeature(@RequestBody FeatureBooleanRecord featureBoolean){
         return featureService.createFeature(featureBoolean);
     }
 
