@@ -18,6 +18,9 @@ public class FeatureServiceImpl implements FeatureService {
     @Autowired
     FeatureBooleanRepository featureBooleanRepository;
 
+    public FeatureServiceImpl(FeatureBooleanRepository featureBooleanRepository) {
+    }
+
     @Override
     public Mono<Object> createFeature(FeatureBooleanRecord feature) {
         FeatureBoolean featureBoolean = new FeatureBoolean(UUID.randomUUID().toString(), feature.name(), feature.active());
