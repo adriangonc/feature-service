@@ -25,7 +25,7 @@ public class FeatureServiceImpl implements FeatureService {
         return featureBooleanRepository.findByName(feature.name())
                 .flatMap(existingFeature -> Mono.error(new FeatureAlreadyExistsException(feature.name())))
                 .switchIfEmpty(featureBooleanRepository.save(featureBoolean)
-                        .map(savedFeatureBoolean -> feature)
+                        .map(savedFeatureBoolean -> featureBoolean)
                         .switchIfEmpty(Mono.error(new RuntimeException("Não foi possível salvar a feature, tente novamente mais tarde!"))));
     }
 
