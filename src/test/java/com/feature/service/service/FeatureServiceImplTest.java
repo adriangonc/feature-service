@@ -42,8 +42,9 @@ public class FeatureServiceImplTest {
         Mono<Object> result = featureService.createFeature(featureBooleanRecord);
 
         //Assert
-        //assertEquals(featureBoolean, result.block());
+        assertEquals(featureBoolean.getName(), ((FeatureBoolean) result.block()).getName());
         verify(featureBooleanRepository, times(1)).findByName(featureBooleanRecord.name());
+        verify(featureBooleanRepository, times(1)).save(any(FeatureBoolean.class));
 
     }
 
