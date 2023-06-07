@@ -19,6 +19,7 @@ public class FeatureServiceImpl implements FeatureService {
     FeatureBooleanRepository featureBooleanRepository;
 
     public FeatureServiceImpl(FeatureBooleanRepository featureBooleanRepository) {
+        this.featureBooleanRepository = featureBooleanRepository;
     }
 
     @Override
