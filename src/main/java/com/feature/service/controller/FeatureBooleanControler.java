@@ -1,5 +1,7 @@
 package com.feature.service.controller;
 
+import com.feature.service.exception.FeatureAlreadyExistsException;
+import com.feature.service.exception.FeatureServiceException;
 import com.feature.service.models.dto.FeatureBooleanRecord;
 import com.feature.service.service.FeatureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +29,14 @@ public class FeatureBooleanControler {
     public Mono<ResponseEntity<Object>> createFeature(@RequestBody FeatureBooleanRecord featureBoolean){
         return featureService.createFeature(featureBoolean).map(feature -> ResponseEntity.ok(feature))
                 .onErrorResume( error -> {
-                    if(error instanceof Exception){
+                    if(error instanceof FeatureAlreadyExistsException){
                         return Mono.just(ResponseEntity.badRequest().body(error.getMessage()));
                     } else {
                         return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
                     }
                 });
     }
+
+
 
 }
