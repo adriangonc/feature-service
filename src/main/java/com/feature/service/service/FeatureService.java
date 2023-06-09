@@ -12,4 +12,6 @@ public interface FeatureService {
     Flux<FeatureBooleanRecord> listAllFeatures();
 
     Mono<Object> changeFeatureStatus(FeatureBooleanRecord featureBooleanRecord);
+
+    Mono<Object> deleteFeatureById(String id);
 }

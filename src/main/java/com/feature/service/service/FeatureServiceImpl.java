@@ -5,9 +5,12 @@ import com.feature.service.models.FeatureBoolean;
 import com.feature.service.models.dto.FeatureBooleanRecord;
 import com.feature.service.repository.FeatureBooleanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.function.Consumer;
 
 @Service
 public class FeatureServiceImpl implements FeatureService {
@@ -50,6 +53,14 @@ public class FeatureServiceImpl implements FeatureService {
                             .map(updateFeature -> new FeatureBooleanRecord(
                                     updateFeature.getId(), updateFeature.getName(), updateFeature.isActive()));
                 });
+
+    }
+
+    @Override
+    public Mono<Object> deleteFeatureById(String id) {
+        return featureBooleanRepository.findById(id).flatMap(featureToDelete -> {
+            return featureBooleanRepository.delete(featureToDelete);
+        });
 
     }
 }

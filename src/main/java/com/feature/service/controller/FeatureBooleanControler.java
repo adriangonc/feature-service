@@ -44,4 +44,10 @@ public class FeatureBooleanControler {
                 .onErrorResume(e -> Mono.just(ResponseEntity.badRequest().body(e.getMessage())));
     }
 
+    @DeleteMapping("/delete/id/{id}")
+    @Transactional
+    public Mono<ResponseEntity> deleteFeatureById(@PathVariable String id){
+        return featureService.deleteFeatureById(id).map(feature -> ResponseEntity.noContent().build());
+    }
+
 }
