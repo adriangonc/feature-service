@@ -1,6 +1,7 @@
 package com.feature.service.service;
 
 import com.feature.service.exception.FeatureAlreadyExistsException;
+import com.feature.service.exception.FeatureNotFoundException;
 import com.feature.service.models.FeatureBoolean;
 import com.feature.service.models.dto.FeatureBooleanRecord;
 import com.feature.service.repository.FeatureBooleanRepository;
@@ -59,7 +60,7 @@ public class FeatureServiceImpl implements FeatureService {
     @Override
     public Mono<Object> deleteFeatureById(String id) {
         return featureBooleanRepository.findById(id)
-                .switchIfEmpty(Mono.error(new RuntimeException("Feature não encontrada!")))
+                .switchIfEmpty(Mono.error(new FeatureNotFoundException(id)))
                 .flatMap(featureToDelete -> featureBooleanRepository.delete(featureToDelete));
 
     }

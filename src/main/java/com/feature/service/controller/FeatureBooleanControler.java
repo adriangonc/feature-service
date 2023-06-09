@@ -1,7 +1,6 @@
 package com.feature.service.controller;
 
 import com.feature.service.exception.FeatureAlreadyExistsException;
-import com.feature.service.exception.FeatureServiceException;
 import com.feature.service.models.dto.FeatureBooleanRecord;
 import com.feature.service.service.FeatureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +45,9 @@ public class FeatureBooleanControler {
 
     @DeleteMapping("/delete/id/{id}")
     @Transactional
-    public Mono<ResponseEntity> deleteFeatureById(@PathVariable String id){
-        return featureService.deleteFeatureById(id).map(feature -> ResponseEntity.noContent().build());
+    public Mono<ResponseEntity<Object>> deleteFeatureById(@PathVariable String id){
+        return featureService.deleteFeatureById(id).map(feature -> ResponseEntity.noContent().build())
+                .onErrorResume(e -> Mono.just(ResponseEntity.badRequest().body(e.getMessage())));
     }
 
 }
