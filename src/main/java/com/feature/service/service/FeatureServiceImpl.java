@@ -58,9 +58,9 @@ public class FeatureServiceImpl implements FeatureService {
 
     @Override
     public Mono<Object> deleteFeatureById(String id) {
-        return featureBooleanRepository.findById(id).flatMap(featureToDelete -> {
-            return featureBooleanRepository.delete(featureToDelete);
-        });
+        return featureBooleanRepository.findById(id)
+                .switchIfEmpty(Mono.error(new RuntimeException("Feature não encontrada!")))
+                .flatMap(featureToDelete -> featureBooleanRepository.delete(featureToDelete));
 
     }
 }
