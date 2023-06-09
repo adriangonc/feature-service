@@ -20,16 +20,16 @@ public class FeatureBooleanControler {
     FeatureService featureService;
 
     @GetMapping
-    public Flux<FeatureBooleanRecord> getAllFeatures(){
+    public Flux<FeatureBooleanRecord> getAllFeatures() {
         return featureService.listAllFeatures();
     }
 
     @PostMapping
     @Transactional
-    public Mono<ResponseEntity<Object>> createFeature(@RequestBody FeatureBooleanRecord featureBoolean){
+    public Mono<ResponseEntity<Object>> createFeature(@RequestBody FeatureBooleanRecord featureBoolean) {
         return featureService.createFeature(featureBoolean).map(feature -> ResponseEntity.ok(feature))
-                .onErrorResume( error -> {
-                    if(error instanceof FeatureAlreadyExistsException){
+                .onErrorResume(error -> {
+                    if (error instanceof FeatureAlreadyExistsException) {
                         return Mono.just(ResponseEntity.badRequest().body(error.getMessage()));
                     } else {
                         return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
@@ -37,6 +37,11 @@ public class FeatureBooleanControler {
                 });
     }
 
-
+    @PutMapping
+    @Transactional
+    public Mono<ResponseEntity<Object>> changeFeatureStatus(@RequestBody FeatureBooleanRecord featureBoolean) {
+        return featureService.changeFeatureStatus(featureBoolean).map(feature -> ResponseEntity.ok(feature))
+                .onErrorResume(e -> Mono.just(ResponseEntity.badRequest().body(e.getMessage())));
+    }
 
 }

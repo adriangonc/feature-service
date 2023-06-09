@@ -9,9 +9,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.nio.file.FileAlreadyExistsException;
-import java.util.UUID;
-
 @Service
 public class FeatureServiceImpl implements FeatureService {
 
@@ -42,5 +39,17 @@ public class FeatureServiceImpl implements FeatureService {
                         featureBoolean.getName(),
                         featureBoolean.isActive()
                 ));
+    }
+
+    @Override
+    public Mono<Object> changeFeatureStatus(FeatureBooleanRecord featureBooleanRecord) {
+        return featureBooleanRepository.findByName(featureBooleanRecord.name())
+                .flatMap(existingFeature -> {
+                    existingFeature.setActive(featureBooleanRecord.active());
+                    return featureBooleanRepository.save(existingFeature)
+                            .map(updateFeature -> new FeatureBooleanRecord(
+                                    updateFeature.getId(), updateFeature.getName(), updateFeature.isActive()));
+                });
+
     }
 }
