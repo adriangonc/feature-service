@@ -21,7 +21,7 @@ public class FeatureBoolean {
         return "FEATURE_" + UUID.randomUUID().toString();
     }
 
-    public FeatureBoolean(String id, String name, boolean active) {
+    public FeatureBoolean(String name, boolean active) {
         this.id = getFeatureId();
         this.name = name;
         this.active = active;

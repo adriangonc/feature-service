@@ -24,7 +24,8 @@ public class FeatureServiceImpl implements FeatureService {
 
     @Override
     public Mono<Object> createFeature(FeatureBooleanRecord feature) {
-        FeatureBoolean featureBoolean = new FeatureBoolean(UUID.randomUUID().toString(), feature.name(), feature.active());
+
+        FeatureBoolean featureBoolean = new FeatureBoolean(feature.name(), feature.active());
 
         return featureBooleanRepository.findByName(feature.name())
                 .flatMap(existingFeature -> Mono.error(new FeatureAlreadyExistsException(feature.name())))
