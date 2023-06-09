@@ -40,7 +40,6 @@ public class FeatureServiceImplTest {
         when(featureBooleanRepository.findByName(featureBooleanRecord.name())).thenReturn(Mono.empty());
         when(featureBooleanRepository.save(any(FeatureBoolean.class))).thenReturn(Mono.just(featureBoolean));
 
-
         //Act
         Mono<Object> result = featureService.createFeature(featureBooleanRecord);
 
@@ -64,6 +63,21 @@ public class FeatureServiceImplTest {
         assertThrows(FeatureAlreadyExistsException.class, () -> featureService.createFeature(featureRecord).block());
         verify(featureBooleanRepository, times(1)).findByName(featureRecord.name());
 
+    }
+
+    @Test
+    public void listAllFeatures_shouldReturnAllFeatures(){
+        //Arrange
+        FeatureBoolean feature1 = new FeatureBoolean("Feature1", true);
+        FeatureBoolean feature2 = new FeatureBoolean("Feature2", false);
+
+        when(featureBooleanRepository.findAll()).thenReturn(Flux.just(feature1, feature2));
+
+        //Act
+        Flux<FeatureBooleanRecord> result = featureService.listAllFeatures();
+
+        //Assert
+        assertEquals(2, result.count().block());
     }
 
 }
