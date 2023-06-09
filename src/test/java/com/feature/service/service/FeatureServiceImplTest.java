@@ -104,4 +104,27 @@ public class FeatureServiceImplTest {
 
     }
 
+    //@Test
+    public void deleteFeature_ShouldDeleteFeatureBoolean() {
+        //Arrange
+        String featureId = "123";
+        FeatureBooleanRecord featureBooleanRecord = new FeatureBooleanRecord(featureId,"FEATURE_TEST_ADR-01", true);
+        FeatureBoolean featureBoolean = new FeatureBoolean(
+                featureBooleanRecord.id(),
+                featureBooleanRecord.name(),
+                featureBooleanRecord.active());
+        when(featureBooleanRepository.findById(featureId)).thenReturn(Mono.just(featureBoolean));
+
+        //Act
+        //Mono<Object> createdFeature = featureService.createFeature(featureBooleanRecord);
+
+        Mono<Object> result = featureService.deleteFeatureById(featureId);
+
+        //Assert
+        assertEquals(Mono.empty(), result.block());
+        verify(featureBooleanRepository, times(1)).findById(featureId);
+        verify(featureBooleanRepository, times(1)).delete(any(FeatureBoolean.class));
+
+    }
+
 }

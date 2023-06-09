@@ -27,6 +27,12 @@ public class FeatureBoolean {
         this.active = active;
     }
 
+    public FeatureBoolean(String id, String name, boolean active) {
+        this.id = id;
+        this.name = name;
+        this.active = active;
+    }
+
     public String getId() {
         return id;
     }
