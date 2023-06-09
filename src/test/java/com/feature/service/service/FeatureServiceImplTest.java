@@ -80,4 +80,28 @@ public class FeatureServiceImplTest {
         assertEquals(2, result.count().block());
     }
 
+    @Test
+    public void editFeature_ShouldEditFeatureBoolean() {
+        //Arrange
+        FeatureBooleanRecord featureBooleanRecord = new FeatureBooleanRecord("","FEATURE_TEST_ADR-01", true);
+        FeatureBoolean featureBoolean = new FeatureBoolean(
+                featureBooleanRecord.name(),
+                featureBooleanRecord.active());
+        when(featureBooleanRepository.findByName(featureBooleanRecord.name())).thenReturn(Mono.just(featureBoolean));
+        when(featureBooleanRepository.save(any(FeatureBoolean.class))).thenReturn(Mono.just(featureBoolean));
+
+        //Act
+        //Mono<Object> createdFeature = featureService.createFeature(featureBooleanRecord);
+
+        FeatureBooleanRecord editedFeature = new FeatureBooleanRecord("","FEATURE_TEST_ADR-01", false);
+
+        Mono<Object> result = featureService.changeFeatureStatus(editedFeature);
+
+        //Assert
+        assertEquals(false, ((FeatureBooleanRecord) result.block()).active());
+        verify(featureBooleanRepository, times(1)).findByName(featureBooleanRecord.name());
+        verify(featureBooleanRepository, times(1)).save(any(FeatureBoolean.class));
+
+    }
+
 }
