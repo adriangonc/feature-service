@@ -6,20 +6,17 @@ import com.feature.service.models.dto.FeatureBooleanRecord;
 import com.feature.service.repository.FeatureBooleanRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class FeatureServiceImplTest {
 
-    private FeatureServiceImpl featureService;
+    private FeatureBooleanServiceImpl featureService;
 
     @Mock
     private FeatureBooleanRepository featureBooleanRepository;
@@ -27,7 +24,7 @@ public class FeatureServiceImplTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        featureService = new FeatureServiceImpl(featureBooleanRepository);
+        featureService = new FeatureBooleanServiceImpl(featureBooleanRepository);
     }
 
     @Test

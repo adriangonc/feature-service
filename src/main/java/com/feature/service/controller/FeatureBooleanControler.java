@@ -2,7 +2,7 @@ package com.feature.service.controller;
 
 import com.feature.service.exception.FeatureAlreadyExistsException;
 import com.feature.service.models.dto.FeatureBooleanRecord;
-import com.feature.service.service.FeatureService;
+import com.feature.service.service.FeatureBooleanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 public class FeatureBooleanControler {
 
     @Autowired
-    FeatureService featureService;
+    FeatureBooleanService featureService;
 
     @GetMapping
     public Flux<FeatureBooleanRecord> getAllFeatures() {

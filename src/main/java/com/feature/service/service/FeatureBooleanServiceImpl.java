@@ -11,13 +11,13 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-public class FeatureServiceImpl implements FeatureService {
+public class FeatureBooleanServiceImpl implements FeatureBooleanService {
 
     public static final String NAO_FOI_POSSIVEL_SALVAR = "Não foi possível salvar a feature, tente novamente mais tarde!";
     @Autowired
     FeatureBooleanRepository featureBooleanRepository;
 
-    public FeatureServiceImpl(FeatureBooleanRepository featureBooleanRepository) {
+    public FeatureBooleanServiceImpl(FeatureBooleanRepository featureBooleanRepository) {
         this.featureBooleanRepository = featureBooleanRepository;
     }
 
