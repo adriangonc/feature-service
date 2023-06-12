@@ -13,7 +13,7 @@ public class FeatureBoolean {
     private String name;
     private boolean active;
 
-    public FeatureBoolean(){
+    public FeatureBoolean() {
         this.id = getFeatureId();
     }
 
