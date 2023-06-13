@@ -50,6 +50,16 @@
 			<artifactId>pitest-maven</artifactId>
 			<version>1.14.1</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.projectreactor.tools/blockhound -->
+		<dependency>
+			<groupId>io.projectreactor.tools</groupId>
+			<artifactId>blockhound</artifactId>
+			<version>1.0.8.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+
+
 	</dependencies>
 
 
