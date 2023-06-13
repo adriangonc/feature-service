@@ -4,7 +4,7 @@ import com.feature.service.models.dto.FeatureTextRecord;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface FeatureTextBoolean {
+public interface FeatureTextService {
 
     Mono<Object> createFeature(FeatureTextRecord feature);
 

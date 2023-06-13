@@ -16,7 +16,7 @@ public class FeatureText {
 
     private boolean active;
 
-    private String value;
+    private String textValue;
 
     public FeatureText(){
         this.id = getFeatureId();
@@ -30,7 +30,7 @@ public class FeatureText {
         this.id = getFeatureId();
         this.name = name;
         this.active = active;
-        this.value = value;
+        this.textValue = value;
     }
 
     public String getId() {
@@ -65,11 +65,11 @@ public class FeatureText {
         this.active = active;
     }
 
-    public String getValue() {
-        return value;
+    public String getTextValue() {
+        return textValue;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setTextValue(String textValue) {
+        this.textValue = textValue;
     }
 }
