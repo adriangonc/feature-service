@@ -1,5 +1,6 @@
 package com.feature.service.service;
 
+import com.feature.service.models.FeatureText;
 import com.feature.service.models.dto.FeatureTextRecord;
 import com.feature.service.repository.FeatureTextRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,13 @@ public class FeatureTextServiceImpl implements FeatureTextService {
     FeatureTextRepository featureTextRepository;
     @Override
     public Mono<Object> createFeature(FeatureTextRecord feature) {
-        return null;
+        var featureText = new FeatureText(feature.name(), feature.active(), feature.textValue());
+
+        return featureTextRepository.save(featureText).map(savedFeature -> new FeatureTextRecord(
+                savedFeature.getId(),
+                savedFeature.getName(),
+                savedFeature.isActive(),
+                savedFeature.getTextValue()));
     }
 
     @Override
